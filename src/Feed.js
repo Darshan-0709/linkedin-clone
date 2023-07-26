@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import FeedForm from "./FeedForm";
 import FeedPost from "./FeedPost";
 import { db } from "./Firebase";
-import { onSnapshot, query, getFirestore, collection, orderBy, addDoc, serverTimestamp, doc } from "firebase/firestore";
+import { onSnapshot, query, collection, orderBy, addDoc, serverTimestamp } from "firebase/firestore";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice'; 
-import { updateDescription } from "./features/userSlice";
+import FlipMove from 'react-flip-move';
 
 const Feed = () => {
   const dispatch = useDispatch()
@@ -52,15 +52,17 @@ const Feed = () => {
       />
       <div className="border-b-2 mt-3 border-gray-400 w-full mx-auto"></div>
       {/* posts */}
-      {posts.map(({id, data: {name, message, profilePic, description }}) => (
-        <FeedPost 
+      <FlipMove>
+        {posts.map(({id, data: {name, message, profilePic, description }}) => (
+          <FeedPost 
           key={id}
           name={name}
           message={message}
           profilePic={profilePic}
           description={description}
-        />
-      ))}
+          />
+        ))}
+      </FlipMove>
     </div>
   );
 };
