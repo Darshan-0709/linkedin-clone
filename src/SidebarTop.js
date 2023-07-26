@@ -2,6 +2,7 @@ import React from 'react'
 import background from './img/background.svg'
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import FlagRoundedIcon from '@mui/icons-material/FlagRounded';
+import PersonIcon from '@mui/icons-material/Person';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice'
 
@@ -18,7 +19,7 @@ const SidebarTop = ({ showMore }) => {
       <div className="rounded-t-xl bg-white overflow-hidden pb-3">
         <div className="relative mb-10">
           <img className="h-16 w-full object-cover" src={background} alt="" />
-          <img className="h-16 w-16 absolute scale-110 object-cover left-1/2 -translate-x-1/2 top-1/2 rounded-full border-[3px] border-white" src={profilePic} alt="Profile Pic" />
+          {profilePic ? <img className="h-16 w-16 absolute scale-110 object-cover left-1/2 -translate-x-1/2 top-1/2 rounded-full border-[3px] border-white" src={profilePic} alt="Profile Pic" /> : <div className="h-16 w-16 bg-gray-300 absolute scale-110 object-cover left-1/2 -translate-x-1/2 top-1/2 rounded-full border-[3px] border-white flex items-center justify-center"><PersonIcon fontSize="large" className="text-gray-500"/></div> }
         </div>
         <h4 className="text-center font-bold text-lg">{name}</h4>
         { <p className="text-center">{description ? description : email}</p>}
