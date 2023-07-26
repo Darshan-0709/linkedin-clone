@@ -13,13 +13,13 @@ const SidebarBottom = ({showMore, onButtonClick}) => {
   }
   return (
     <>
-      <div className={`${showMore ? '' : 'hidden'} mt-2 py-4 rounded-t-lg bg-white border-b-[1px]`}>
+      <div className={`${showMore ? '' : 'hidden'} mt-2 py-4 rounded-t-lg bg-white border-b-[1px] sticky top-16`}>
           <h4 className="font-semibold text-lg px-3">Recent</h4>
           {event('react js')}
           {event('programming')}
           {event('Java meetup NewYork')}
       </div>
-      <button className="sm:hidden w-full mt-2 bg-gray-300" onClick={()=> onButtonClick()}>{showMore ? 'Show less': 'Show more'}{showMore ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}</button>
+      <button className="md:hidden w-full mt-2 bg-gray-300" onClick={()=> onButtonClick()}>{showMore ? 'Show less': 'Show more'}{showMore ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}</button>
     </>
   )
 }
