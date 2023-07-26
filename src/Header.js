@@ -9,6 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import HeaderButton from "./HeaderButton";
+import PersonIcon from '@mui/icons-material/Person';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { useDispatch } from "react-redux";
@@ -18,6 +19,7 @@ import { logout, updateDescription } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { collection, doc, getDocs, query, updateDoc, where, writeBatch } from "firebase/firestore";
+import { Icon } from "@mui/material";
 
 const Header = () => {
   const [overflow, setOverflow] = useState(false);
@@ -115,7 +117,7 @@ const Header = () => {
               overflow ? "" : "overflow-hidden h-14"
             }`}>
             <button
-              className="min-[415px]:hidden absolute z-10 h-6 w-6 top-1/2 -translate-y-1/2 right-3 hover:bg-gray-200"
+              className="min-[356px]:hidden absolute z-10 h-6 w-6 top-1/2 -translate-y-1/2 right-3 hover:bg-gray-200"
               onClick={() => toggleOverFlow()}>
               <MoreHorizIcon />{" "}
             </button>
@@ -142,6 +144,7 @@ const Header = () => {
             <HeaderButton
               onButtonClick={toggleShowEditProfile}
               profilePic={profilePic}
+              Icon={PersonIcon}
               Title={"Me"}
               Arrow={ArrowDropDownIcon}
             />
