@@ -11,34 +11,36 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
 function App() {
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
-        const userRef = doc(db, 'users', userAuth.uid)
-        getDoc(userRef)
-        .then((docSnap) => {
+        // handle refresh
+        const userRef = doc(db, "users", userAuth.uid);
+        getDoc(userRef).then((docSnap) => {
           if (docSnap.exists()) {
             const userDocData = docSnap.data();
-            const userDescription = userDocData.description || '';
-            dispatch(login({
-              email: userAuth.email,
-              name: userAuth.displayName,
-              uid: userAuth.uid,
-              photoUrl: userAuth.photoURL,
-              description: userDescription,
-            }))
+            const userDescription = userDocData.description || "";
+            dispatch(
+              login({
+                email: userAuth.email,
+                name: userAuth.displayName,
+                uid: userAuth.uid,
+                photoUrl: userAuth.photoURL,
+                description: userDescription,
+              })
+            );
           } else {
             console.log("No such document!");
           }
-        })
-      }else{
+        });
+      } else {
         dispatch(logout());
       }
     });
-  }, [])
+  }, []);
 
   return (
     <div className="m-auto min-h-screen flex flex-col">
@@ -49,14 +51,14 @@ function App() {
         <Login />
       ) : (
         <div className="bg-gray-100 flex-1 border-2">
-        <div className="md:flex md:px-2 md:space-x-6 max-w-6xl mx-auto pt-6 flex-wrap">
-          {/* sideber */}
+          <div className="md:flex md:px-2 md:space-x-6 max-w-6xl mx-auto pt-6 flex-wrap">
+            {/* sideber */}
             <Sidebar />
             {/* feed */}
             <Feed />
             {/* widgets */}
             <Widgets />
-        </div>
+          </div>
         </div>
       )}
     </div>
