@@ -9,7 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import HeaderButton from "./HeaderButton";
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { useDispatch } from "react-redux";
@@ -18,7 +18,15 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { logout, updateDescription } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
-import { collection, doc, getDocs, query, updateDoc, where, writeBatch } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+  writeBatch,
+} from "firebase/firestore";
 import { Icon } from "@mui/material";
 
 const Header = () => {
@@ -31,15 +39,17 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // update description when change
     setNewDescription(description);
   }, [description]);
 
-  const updateDescriptionAndPosts = async () => { 
+  const updateDescriptionAndPosts = async () => {
+    // update description user profile and user's posts
     try {
       if (!newDescription) {
         return;
       }
-  
+
       const userRef = doc(db, "users", auth.currentUser.uid);
       await updateDoc(userRef, { description: newDescription });
       dispatch(updateDescription(newDescription));
@@ -84,13 +94,14 @@ const Header = () => {
   }
 
   window.addEventListener("resize", () => {
+    // make it responsive
     if (window.innerWidth > 415) setOverflow(false);
   });
 
   const logoutOffApp = () => {
     dispatch(logout());
     signOut(auth);
-    toggleShowEditProfile()
+    toggleShowEditProfile();
   };
 
   return (
@@ -101,8 +112,7 @@ const Header = () => {
             className="text-[#0072b1] text-4xl"
             icon={faLinkedin}
           />
-          <div
-            className="sm:bg-[#0073b114] px-1 rounded-sm overflow-hidden flex gap-2 items-center grow">
+          <div className="sm:bg-[#0073b114] px-1 rounded-sm overflow-hidden flex gap-2 items-center grow">
             <SearchRoundedIcon className="text-gray-600 text-6xl" />
             <input
               className="hidden sm:block focus:outline-none bg-transparent pr-2"
