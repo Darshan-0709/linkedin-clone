@@ -1,12 +1,17 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import SidebarTop from './SidebarTop'
 import SidebarBottom from './SidebarBottom'
 
 const Sidebar = () => {
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState()
   function moreInfo(){
     setShowMore(!showMore)
   }
+  
+  useEffect(()=>{
+    window.innerWidth > 768 ? setShowMore(true) : setShowMore(false)
+  },[])
+
   window.addEventListener("resize", ()=> {
     if (window.innerWidth > 768){
       console.log(window.innerWidth)
